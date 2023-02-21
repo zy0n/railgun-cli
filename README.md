@@ -63,6 +63,13 @@ Okay so its relatively simple. You only need your mnemonic.
  # Default: ethereum    - Choices: [ethereum, polygon] 
 
 ```
+
+```sh
+# example.env file. rename this to .env in the project root directory.
+RAILGUN_MNEMONIC='pause crystal tornado alcohol genre cement fade large song like bag where'
+RAILGUN_PASSWORD='SomethingSuperSecret'
+RAILGUN_CHAIN='polygon'
+```
 Example Usage:
 **Do NOT load funds into the example mnemonic. This was pulled from the RAILGUN mocks. It's a good example to use here, as it has available transaction history on polygon to view.**
 

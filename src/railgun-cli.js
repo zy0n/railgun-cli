@@ -1,3 +1,4 @@
+require('dotenv').config()
 const fs = require("fs");
 const crypto = require("crypto");
 const { BigNumber, utils } = require("ethers");
@@ -161,21 +162,24 @@ async function fetchHistory(walletInfo, chainInfo) {
 
 async function main() {
   console.log("\n");
-  if (!argv.mnemonic) {
+  if (!argv.mnemonic && !process.env.RAILGUN_MNEMONIC) {
     console.log(
       `Error:\nPlease enter a mnemonic using flag --mnemonic 'mnemonic phrase'\n\nExample: railgun-cli --pass secretpassword --mnemonic='dog fish cat duck turkey'\n\n`
     );
     return;
   }
-  const mnemonic = argv.mnemonic;
-  if (!argv.pass) {
+  const mnemonic = process.env.RAILGUN_MNEMONIC || argv.mnemonic;
+  if (!argv.pass && !process.env.RAILGUN_PASSWORD) {
     console.log(
       `Error:\nPlease enter a password using flag --pass [password]\n\nExample: railgun-cli --pass secretpassword --mnemonic='dog fish cat duck turkey'\n\n`
     );
     return;
   }
-  const password = argv.pass;
-  let chain = argv.chain || "ethereum";
+  const password = process.env.RAILGUN_PASSWORD || argv.pass;
+
+  let chain = (process.env.RAILGUN_CHAIN || argv.chain) || "ethereum";
+
+  console.log(`Scanning ${chain.toUpperCase()} Chain!`)
   const currentChain = await initializeEngine(chain);
   const { railgunWalletInfo, error } = await initializeWallet(
     password,

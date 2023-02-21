@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@railgun-community/quickstart": "^3.11.10",
+    "dotenv": "^16.0.3",
     "leveldown": "^6.1.1"
   }
-  
 }

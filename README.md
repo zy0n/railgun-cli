@@ -83,6 +83,7 @@ node src/railgun-cli.js --mnemonic 'pause crystal tornado alcohol genre cement f
 - [ ] Add support for the rest of the available chains.
 - [ ] Add support for loading existing stored wallets.
 - [ ] Add support for handling transactions ? 
+
 [ 🎱 ] Suggestions??
 
 ###### As of right now building with PKG is failing to produce a running executable. Which in reality, i didnt want to provide executables anyway, but its nice for you to build them still!

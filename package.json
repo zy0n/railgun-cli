@@ -1,0 +1,17 @@
+{
+  "name": "railgun-cli",
+  "version": "1.0.0",
+  "description": "Railgun Privacy DEFI Wallet CLI",
+  "main": "src/railgun-cli.js",
+  "scripts": {
+    "start": "node src/railgun-cli.js",
+    "build": "pkg --public-packages 'leveldown' src/railgun-cli.js --out-path build/ && cp -r node_modules/leveldown/prebuilds build/"
+  },
+  "author": "zy0n.bear",
+  "license": "MIT",
+  "dependencies": {
+    "@railgun-community/quickstart": "^3.11.10",
+    "leveldown": "^6.1.1"
+  }
+  
+}

@@ -54,7 +54,7 @@ End with an example of getting some data out of the system or using it for a lit
 ## Usage <a name = "usage"></a>
 
 Okay so its relatively simple. You only need your mnemonic.
-#####Usage Flags:
+##### Usage Flags:
 ```sh
 
  --mnemonic 'YOUR_MNEMONIC_PHRASE' # Mnemonic Must be quoted.

@@ -67,12 +67,12 @@ Example Usage:
 **Do NOT load funds into the example mnemonic. This was pulled from the RAILGUN mocks. It's a good example to use here, as it has available transaction history on polygon to view.**
 
 *Be sure make sure you're in the main directory.*
-#####yarn
+##### yarn
 ```sh
 yarn start --mnemonic 'pause crystal tornado alcohol genre cement fade large song like bag where' --pass SomethingSecret --chain polygon
 ```
 
-#####node
+##### node
 ```sh
 node src/railgun-cli.js --mnemonic 'pause crystal tornado alcohol genre cement fade large song like bag where' --pass SomethingSecret --chain polygon
 ```

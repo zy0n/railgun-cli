@@ -9,7 +9,7 @@
 
 ## About <a name = "about"></a>
 
-This is a basic implementation for pulling Transaction History and current RAILGUNB balances from the RAILGUN Relays. 
+This is a basic implementation for local verification of Transaction History and current RAILGUN balances from the RAILGUN Relays. 
 
 
 🍻 A full transaction history will be saved locally for double checking your balances and transactions. 

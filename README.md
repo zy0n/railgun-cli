@@ -5,7 +5,7 @@
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
+- [Todo](#todo)
 
 ## About <a name = "about"></a>
 
@@ -88,8 +88,7 @@ node src/railgun-cli.js --mnemonic 'pause crystal tornado alcohol genre cement f
 ######As of right now building with PKG is failing to produce a running executable. Which in reality, i didnt want to provide executables anyway, but its nice for you to build them still!
 
 #Feel free to fork & contribute!
-
-### 🍻 Cheers for Donations!
+### 🍻 Cheers for Donations! <a name = "donate"></a>
 *If you like my work and would like to help me keep on keepin' on those options are below. Thanks!!*
 
 Definitely not a requirement 💋

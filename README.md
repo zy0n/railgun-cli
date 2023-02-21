@@ -89,9 +89,11 @@ node src/railgun-cli.js --mnemonic 'pause crystal tornado alcohol genre cement f
 
 #Feel free to fork & contribute!
 
-###🍻 Cheers for Donations!
+### 🍻 Cheers for Donations!
 *If you like my work and would like to help me keep on keepin' on those options are below. Thanks!!*
+
 Definitely not a requirement 💋
+
 👁️ Public (unshielded): 
 ```sh
 0xD74b78AA69d9ee3e232beEE935025530E4d7080d

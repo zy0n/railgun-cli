@@ -53,7 +53,10 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Usage <a name = "usage"></a>
 
-Okay so its relatively simple. You only need your mnemonic.
+Okay so its relatively simple. 
+  - Required:
+    - Mnemonic 
+    - Password 
 ##### Usage Flags:
 ```sh
 
@@ -63,7 +66,7 @@ Okay so its relatively simple. You only need your mnemonic.
  # Default: ethereum    - Choices: [ethereum, polygon] 
 
 ```
-
+.env file usage (optional)
 ```sh
 # example.env file. rename this to .env in the project root directory.
 RAILGUN_MNEMONIC='pause crystal tornado alcohol genre cement fade large song like bag where'
@@ -82,6 +85,12 @@ yarn start --mnemonic 'pause crystal tornado alcohol genre cement fade large son
 ##### node
 ```sh
 node src/railgun-cli.js --mnemonic 'pause crystal tornado alcohol genre cement fade large song like bag where' --pass SomethingSecret --chain polygon
+```
+
+##### [.env usage]
+```sh
+yarn start
+node src/railgun-cli.js
 ```
 
 

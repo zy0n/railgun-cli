@@ -82,7 +82,7 @@ RAILGUN_WALLET_ID='6e4b85e0bf1fc2a3a3a0c23582c5f76fba68b237e2dfe2973fa3c0f21b859
 ```
 
 ##### After the first run:
-###### You can remove the mnemonic, but set it as something. 'none' is fine. just as long as it has some sort of value. Your wallet info is cryptographically stored within the .railgun.db file. This provides the ability to reload your existing state with the correct password & start polling again from there. 
+###### You can remove the mnemonic once the first run has been completed. Your wallet info is cryptographically stored within the .railgun.db file. This provides the ability to reload your existing state with the correct password & start polling again from there. 
 
 
 

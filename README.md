@@ -16,6 +16,8 @@ This is a basic implementation for local verification of Transaction History and
 
 ⛔️ No transactions will be made!
 
+###### Reminder that the information output from this application within txdata.json should be considered private information and treated as such. This is essentially a roadmap of your private transactions.
+
 ## Getting Started <a name = "getting_started"></a>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -72,8 +74,19 @@ Okay so its relatively simple.
 RAILGUN_MNEMONIC='pause crystal tornado alcohol genre cement fade large song like bag where'
 RAILGUN_PASSWORD='SomethingSuperSecret'
 RAILGUN_CHAIN='polygon'
+
+# Auto-Generated, If not already present. 
+# If present it looks for the wallet ID stored, and uses the password to decrypt.
+# You can store these ID's for reference and recall the wallet later on with the correct password.
+RAILGUN_WALLET_ID='6e4b85e0bf1fc2a3a3a0c23582c5f76fba68b237e2dfe2973fa3c0f21b8598b6'
 ```
-Example Usage:
+
+##### After the first run:
+###### You can remove the mnemonic, but set it as something. 'none' is fine. just as long as it has some sort of value. Your wallet info is cryptographically stored within the .railgun.db file. This provides the ability to reload your existing state with the correct password & start polling again from there. 
+
+
+
+## Example Usage:
 **Do NOT load funds into the example mnemonic. This was pulled from the RAILGUN mocks. It's a good example to use here, as it has available transaction history on polygon to view.**
 
 *Be sure make sure you're in the main directory.*
@@ -97,7 +110,7 @@ node src/railgun-cli.js
 ## Todo: <a name = "todo"></a>
 - [ ] Get the binaries to build properly.
 - [ ] Add support for the rest of the available chains.
-- [ ] Add support for loading existing stored wallets.
+- [x] Add support for loading existing stored wallets.
 - [ ] Add support for handling transactions ? 
 
 [ 🎱 ] Suggestions??

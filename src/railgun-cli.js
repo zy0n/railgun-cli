@@ -11,6 +11,7 @@ const {
   startRailgunEngine,
   createRailgunWallet,
   fullWalletForID,
+  loadWalletByID,
   getWalletTransactionHistory,
   setOnBalanceUpdateCallback,
   closeRailgunEngine,
@@ -132,7 +133,31 @@ async function initializeWallet(password, mnemonic) {
     .createHash("sha256")
     .update(`${salt}:${password}`)
     .digest("hex");
-  return await createRailgunWallet(secretBytes, mnemonic);
+
+
+  const initWalletId = process.env.RAILGUN_WALLET_ID;
+  if(initWalletId){
+    try {
+      console.log('\n✨ Loading Existing Wallet')
+      const result = await loadWalletByID(secretBytes, initWalletId, false);
+      if(result.error) throw new Error(result.error)
+      return result;
+    } catch (error) {
+      if(error.message.includes('Unable to decrypt ciphertext.')){
+        console.log('\n💥 Invalid Password for Wallet ID.')
+      } else {
+        console.log(error.message)
+      }
+      process.exit(0)
+    }
+  }
+  const result = await createRailgunWallet(secretBytes, mnemonic);
+  if(result.error){
+    console.log(result.error);
+    process.exit(0);
+  }
+  fs.appendFileSync('.env', `\nRAILGUN_WALLET_ID='${result.railgunWalletInfo.id}'`)
+  return result;
 }
 
 async function fetchHistory(walletInfo, chainInfo) {
@@ -162,7 +187,7 @@ async function fetchHistory(walletInfo, chainInfo) {
 
 async function main() {
   console.log("\n");
-  if (!argv.mnemonic && !process.env.RAILGUN_MNEMONIC) {
+  if (!argv.mnemonic && !process.env.RAILGUN_MNEMONIC && !process.env.RAILGUN_WALLET_ID) {
     console.log(
       `Error:\nPlease enter a mnemonic using flag --mnemonic 'mnemonic phrase'\n\nExample: railgun-cli --pass secretpassword --mnemonic='dog fish cat duck turkey'\n\n`
     );

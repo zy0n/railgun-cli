@@ -71,7 +71,7 @@ Okay so its relatively simple.
  --mnemonic 'YOUR_MNEMONIC_PHRASE' # Mnemonic Must be quoted.
  --pass SECRET_PASSWORD
  --chain ethereum #OPTIONALPARAM|
- # Default: ethereum    - Choices: [ethereum, polygon]
+ # Default: ethereum    - Choices: [ethereum, polygon, binance, arbitrum]
 
 ```
 

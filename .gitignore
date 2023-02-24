@@ -1,11 +1,12 @@
 # Additional
 *.db 
 txdata.json
-build/*
+build
 package-lock.json
 yarn.lock
-
-
+reports
+.vscode
+.editorconfig
 
 
 # Logs

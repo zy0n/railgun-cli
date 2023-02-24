@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/railgun-cli.js",
     "clean": "rm -rf .railgun.db txdata.json",
-    "build": "pkg --public-packages 'leveldown' src/railgun-cli.js --out-path build/ && cp -r node_modules/leveldown/prebuilds build/"
+    "build": "pkg --public-packages 'leveldown' -t node16-macos-x64 src/railgun-cli.js --out-path build/ && cp -r node_modules/leveldown/prebuilds build/"
   },
   "author": "zy0n.bear",
   "license": "MIT",

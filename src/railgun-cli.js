@@ -25,6 +25,7 @@ const engineDb = new LevelDOWN(RAILGUN_DB);
 
 const closeApp = () => {
   closeRailgunEngine();
+  console.log("\nExiting Railgun-CLI");
   process.exit(0);
 };
 
@@ -96,8 +97,9 @@ async function initializeWallet(password, mnemonic) {
 }
 
 async function fetchHistory(walletInfo, chainInfo, chainName) {
-  console.log(`RAILGUN zkAddress: ${walletInfo.railgunAddress}`);
-  console.log("Fetching Transaction History 👀");
+  console.log(`🛡️ RAILGUN Wallet ID: ${walletInfo.id}`);
+  console.log(`🛡️ RAILGUN zkAddress: ${walletInfo.railgunAddress}`);
+  console.log("\nFetching Transaction History 👀");
   const wallet = fullWalletForID(walletInfo.id);
   const balances = await wallet.balances(chainInfo);
   setOnBalanceUpdateCallback(async (tokenBalances) => {
@@ -118,13 +120,13 @@ async function fetchHistory(walletInfo, chainInfo, chainName) {
       `${chainName}_${walletInfo.id.slice(0, 6)}.json`
     );
     fs.writeFileSync(outPath, outFile);
-    console.log(`Full report saved to: ${outPath}`);
+    console.log(`\n💾 Full report saved to: ${outPath}`);
     closeApp();
   });
 }
 
 async function main() {
-  console.log("\n");
+  // console.log("\n");
   if (
     !argv.mnemonic &&
     !process.env.RAILGUN_MNEMONIC &&
@@ -146,7 +148,7 @@ async function main() {
 
   const chain = process.env.RAILGUN_CHAIN || argv.chain || "ethereum";
 
-  console.log(`Scanning ${chain.toUpperCase()} Chain!`);
+  console.log(`\nScanning ${chain.toUpperCase()} Chain!`);
   const currentChain = await initializeEngine(chain);
   const { railgunWalletInfo, error } = await initializeWallet(
     password,

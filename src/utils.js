@@ -41,6 +41,45 @@ const networkConfig = {
       },
     ],
   },
+  binance: {
+    name: "BNB_Chain",
+    type: ChainType.EVM,
+    chainId: 56,
+    providers: [
+      {
+        provider: "https://bsc-dataseed1.binance.org",
+        priority: 1,
+        weight: 1,
+      },
+      {
+        provider: "https://bsc-dataseed2.binance.org",
+        priority: 2,
+        weight: 1,
+      },
+      {
+        provider: "https://bsc-dataseed3.binance.org",
+        priority: 3,
+        weight: 1,
+      },
+    ],
+  },
+  arbitrum: {
+    name: "Arbitrum",
+    type: ChainType.EVM,
+    chainId: 42161,
+    providers: [
+      {
+        provider: "https://rpc.ankr.com/arbitrum",
+        priority: 1,
+        weight: 1,
+      },
+      {
+        provider: "https://arbitrumrpc.com",
+        priority: 2,
+        weight: 1,
+      },
+    ],
+  },
 };
 
 function serializeObject(obj) {

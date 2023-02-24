@@ -121,7 +121,7 @@ node src/railgun-cli.js
 ## Todo: <a name = "todo"></a>
 
 - [ ] Get the binaries to build properly.
-- [ ] Add support for the rest of the available chains.
+- [x] Add support for the rest of the available chains.
 - [x] ~~Add support for loading existing stored wallets~~.
 - [ ] Add support for handling transactions ?
 

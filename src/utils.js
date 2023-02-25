@@ -1,11 +1,18 @@
 const { ChainType } = require("@railgun-community/shared-models");
-const { BigNumber, utils } = require("ethers");
+const { BigNumber, Wallet, utils } = require("ethers");
+
+function getAddressFromMnemonic(mnemonic) {
+  const path = "m/44'/60'/0'/0/0"; // the derivation path
+  const wallet = Wallet.fromMnemonic(mnemonic, path);
+  return wallet.address;
+}
 
 const networkConfig = {
   ethereum: {
     name: "Ethereum",
     type: ChainType.EVM,
     chainId: 1,
+    blockscan: "https://etherscan.io/address/",
     providers: [
       {
         provider: "https://rpc.ankr.com/eth",
@@ -23,6 +30,7 @@ const networkConfig = {
     name: "Polygon",
     type: ChainType.EVM,
     chainId: 137,
+    blockscan: "https://polygonscan.com/address/",
     providers: [
       {
         provider: "https://rpc.ankr.com/polygon",
@@ -45,6 +53,7 @@ const networkConfig = {
     name: "BNB_Chain",
     type: ChainType.EVM,
     chainId: 56,
+    blockscan: "https://bscscan.com/address/",
     providers: [
       {
         provider: "https://bsc-dataseed1.binance.org",
@@ -67,6 +76,7 @@ const networkConfig = {
     name: "Arbitrum",
     type: ChainType.EVM,
     chainId: 42161,
+    blockscan: "https://arbiscan.io/address/",
     providers: [
       {
         provider: "https://rpc.ankr.com/arbitrum",
@@ -116,4 +126,5 @@ module.exports = {
   networkConfig,
   serializeObject,
   generateReport,
+  getAddressFromMnemonic,
 };

@@ -18,7 +18,12 @@ const {
   closeRailgunEngine,
 } = require("@railgun-community/quickstart");
 
-const { networkConfig, serializeObject, generateReport } = require("./utils");
+const {
+  networkConfig,
+  serializeObject,
+  generateReport,
+  getAddressFromMnemonic,
+} = require("./utils");
 
 const RAILGUN_DB = ".railgun.db";
 const engineDb = new LevelDOWN(RAILGUN_DB);
@@ -159,6 +164,10 @@ async function main() {
     closeApp();
     return;
   }
+  const publicAddress = getAddressFromMnemonic(mnemonic);
+  console.log(
+    `👀 View Public Balances for ${publicAddress}\n\n🌎 ${networkConfig[chain].blockscan}${publicAddress}\n`
+  );
   await fetchHistory(railgunWalletInfo, currentChain, chain);
 }
 main();

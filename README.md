@@ -62,7 +62,8 @@ Okay so its relatively simple.
 
 - Required:
   - Mnemonic
-  - Password
+  - New Password - used to cryptographically store your wallet data.
+    Be mindful that your output transaction data, is not encrypted.
 
 ##### Usage Flags:
 
@@ -118,11 +119,14 @@ yarn start
 node src/railgun-cli.js
 ```
 
+Example of running script:
+![alt text](images/example-run.png "Example of running script.")
+
 ## Todo: <a name = "todo"></a>
 
 - [ ] Get the binaries to build properly.
-- [x] Add support for the rest of the available chains.
-- [x] ~~Add support for loading existing stored wallets~~.
+- [x] ~~Add support for the rest of the available chains.~~
+- [x] ~~Add support for loading existing stored wallets.~~
 - [ ] Add support for handling transactions ?
 
 [ 🎱 ] Suggestions??

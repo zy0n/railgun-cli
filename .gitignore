@@ -7,7 +7,7 @@ yarn.lock
 reports
 .vscode
 .editorconfig
-
+artifacts.storage
 
 # Logs
 logs

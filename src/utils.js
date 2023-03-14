@@ -1,11 +1,44 @@
 const { ChainType } = require("@railgun-community/shared-models");
-const { BigNumber, Wallet, utils } = require("ethers");
+const { BigNumber, Wallet, utils, Contract, providers } = require("ethers");
 
 function getAddressFromMnemonic(mnemonic) {
   const path = "m/44'/60'/0'/0/0"; // the derivation path
   const wallet = Wallet.fromMnemonic(mnemonic, path);
   return wallet.address;
 }
+
+const readableAmounts = async (tokenBalances, chainName) => {
+  const providerURL = networkConfig[chainName].providers[0].provider;
+  const provider = new providers.JsonRpcProvider(providerURL);
+  const result = Promise.all(
+    tokenBalances.map(async (balance) => {
+      const privateBalance = balance;
+      const contract = new Contract(
+        balance.tokenAddress,
+        [
+          "function symbol() view returns (string)",
+          "function decimals() view returns (uint8)",
+        ],
+        provider
+      );
+      const decimals = await contract.decimals();
+      const symbol = await contract.symbol();
+      const decimalAmount = BigNumber.from(10).pow(decimals);
+      const converted =
+        decimals === 18
+          ? utils.formatEther(
+              BigNumber.from(balance.amountString).toHexString()
+            )
+          : BigNumber.from(balance.amountString).div(decimalAmount);
+      privateBalance.amountReadable = converted.toString(); // utils.formatEther(converted.toString());
+      privateBalance.symbol = symbol;
+      return privateBalance;
+    })
+  );
+  return result;
+};
+
+const getTokenInfo = (address, provider) => {};
 
 const networkConfig = {
   ethereum: {
@@ -104,7 +137,7 @@ function serializeObject(obj) {
 }
 
 const formatAmount = (obj) => {
-  obj.amountString = utils.formatEther(BigNumber.from(obj.amountString));
+  obj.amountString = BigNumber.from(obj.amountString).toString();
   return obj;
 };
 
@@ -127,4 +160,5 @@ module.exports = {
   serializeObject,
   generateReport,
   getAddressFromMnemonic,
+  readableAmounts,
 };

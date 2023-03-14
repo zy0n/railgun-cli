@@ -15,7 +15,7 @@ const {
   loadWalletByID,
   getWalletTransactionHistory,
   setOnBalanceUpdateCallback,
-  closeRailgunEngine,
+  stopRailgunEngine,
 } = require("@railgun-community/quickstart");
 
 const {
@@ -23,13 +23,14 @@ const {
   serializeObject,
   generateReport,
   getAddressFromMnemonic,
+  readableAmounts,
 } = require("./utils");
 
 const RAILGUN_DB = ".railgun.db";
 const engineDb = new LevelDOWN(RAILGUN_DB);
 
 const closeApp = () => {
-  closeRailgunEngine();
+  stopRailgunEngine();
   console.log("\nExiting Railgun-CLI");
   process.exit(0);
 };
@@ -110,11 +111,15 @@ async function fetchHistory(walletInfo, chainInfo, chainName) {
   setOnBalanceUpdateCallback(async (tokenBalances) => {
     const _txHistory = await getWalletTransactionHistory(chainInfo, wallet.id);
     const txHistory = generateReport(_txHistory.items);
+    // serialize the tokenBalances too
+    const dispTokenBalances = await readableAmounts(
+      tokenBalances.erc20Amounts,
+      chainName
+    );
     console.log("🎱 Transactions Found:", _txHistory.items?.length);
-
     const fullTxData = serializeObject(balances);
     const outFile = JSON.stringify(
-      { tokenBalances, txHistory, fullTxData },
+      { tokenBalances: dispTokenBalances, txHistory, fullTxData },
       null,
       2
     );
@@ -161,7 +166,7 @@ async function main() {
   );
   if (error) {
     console.log("💥 Error Initializing.");
-    closeApp();
+    // closeApp();
     return;
   }
   const publicAddress = getAddressFromMnemonic(mnemonic);

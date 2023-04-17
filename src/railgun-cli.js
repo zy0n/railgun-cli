@@ -16,6 +16,7 @@ const {
   getWalletTransactionHistory,
   setOnBalanceUpdateCallback,
   stopRailgunEngine,
+  setLoggers,
 } = require("@railgun-community/quickstart");
 
 const {
@@ -28,11 +29,15 @@ const {
 
 const RAILGUN_DB = ".railgun.db";
 const engineDb = new LevelDOWN(RAILGUN_DB);
-
+let alreadyFired = false;
 const closeApp = () => {
-  stopRailgunEngine();
-  console.log("\nExiting Railgun-CLI");
-  process.exit(0);
+  if (alreadyFired) return;
+  alreadyFired = true;
+  setTimeout(() => {
+    stopRailgunEngine();
+    console.log("\nExiting Railgun-CLI");
+    process.exit(0);
+  }, 0.1 * 60 * 1000);
 };
 
 const artifactStorage = new ArtifactStore(
@@ -44,21 +49,35 @@ const artifactStorage = new ArtifactStore(
   fs.promises.fileExists
 );
 
+const interceptLog = {
+  log: (log) => {
+    // manage the hook here, monitor the relayer uptimes.
+    const dateFormat = Date();
+    if (log.indexOf("Finished historical event scan") != -1) {
+      console.log("WE FINISHED SCAN");
+      closeApp();
+    }
+    console.log(log);
+    // console.log(`Loggz: ${match}`)
+  },
+};
+
 async function initializeEngine(chainName) {
   // initialize engine
   await startRailgunEngine(
     "railguncli",
     engineDb,
-    false,
+    true,
     artifactStorage,
     false,
     false
   );
+  setLoggers(interceptLog.log);
   // initialize network
   await loadProvider(
     networkConfig[chainName],
     networkConfig[chainName].name,
-    false
+    true
   );
 
   return {
@@ -131,7 +150,6 @@ async function fetchHistory(walletInfo, chainInfo, chainName) {
     );
     fs.writeFileSync(outPath, outFile);
     console.log(`\n💾 Full report saved to: ${outPath}`);
-    closeApp();
   });
 }
 

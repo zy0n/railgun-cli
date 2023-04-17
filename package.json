@@ -11,7 +11,7 @@
   "author": "zy0n.bear",
   "license": "MIT",
   "dependencies": {
-    "@railgun-community/quickstart": "4.1.6",
+    "@railgun-community/quickstart": "4.3.9",
     "dotenv": "^16.0.3",
     "leveldown": "^6.1.1"
   }

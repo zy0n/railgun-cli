@@ -51,14 +51,12 @@ const artifactStorage = new ArtifactStore(
 
 const interceptLog = {
   log: (log) => {
-    // manage the hook here, monitor the relayer uptimes.
     const dateFormat = Date();
     if (log.indexOf("Finished historical event scan") != -1) {
       console.log("WE FINISHED SCAN");
       closeApp();
     }
     console.log(log);
-    // console.log(`Loggz: ${match}`)
   },
 };
 
@@ -184,7 +182,6 @@ async function main() {
   );
   if (error) {
     console.log("💥 Error Initializing.");
-    // closeApp();
     return;
   }
   const publicAddress = getAddressFromMnemonic(mnemonic);

@@ -49,14 +49,24 @@ const artifactStorage = new ArtifactStore(
   fs.promises.fileExists
 );
 
+const hide_logs = [
+  "wallet:",
+  "scanHistory:",
+  "most recent",
+  "lastSyncedBlock:",
+];
+
 const interceptLog = {
-  log: (log) => {
+  log: (logText) => {
     const dateFormat = Date();
-    if (log.indexOf("Finished historical event scan") != -1) {
+    if (logText.indexOf("Finished historical event scan") != -1) {
       console.log("WE FINISHED SCAN");
       closeApp();
     }
-    console.log(log);
+    const filtered = hide_logs.filter((t) => {
+      return logText.indexOf(t) !== -1;
+    });
+    if (filtered.length == 0) console.log(logText);
   },
 };
 
